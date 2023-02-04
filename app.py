@@ -26,7 +26,7 @@ def inference(model_inputs:dict) -> dict:
     
     # Run the model
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to("cuda")
-    output = model.generate(input_ids, max_length=100)
+    output = model.generate(input_ids, max_new_tokens=5120, top_p=0.8, temperature=1.0, do_sample=True)
     result = tokenizer.decode(output[0], skip_special_tokens=True)
 
     # Return the results as a dictionary
